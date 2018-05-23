@@ -1,24 +1,29 @@
+
+//importar pacotes 
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var produtorouter = require('./app/routes/produtoroutes');
+var clienterouter = require('./app/routes/clienteroutes');
+var pedidorouter = require('./app/routes/pedidoroutes');
 
-app.use(bodyParser.urlencoded({extended: true}));
+
+//PERSISTÊNCIA
+mongoose.connect('mongodb://localhost/bdCrud');
+
+//Configurar a app para usar o body-parser
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
+//Definindo a porta onde o servidor vai responder
 var port = process.env.port || 8000;
 
-var router = express.Router();
-
-router.use(function(req,res,next){
-    console.log("Interceptação pelo middleware ok");
-    next();
-});
-
-router.get('/', function(req,res){
-    res.json({'message':'OK, rota de teste está funcionando'});
-});
-
-app.use('/api', router);
+//Vinculo da app com o motor de rotas
+//Dedfinindo uma rota padrão para as minhas apis
+app.use('/api', produtorouter);
+app.use('/api', clienterouter);
+app.use('/api', pedidorouter);
 
 app.listen(port);
-console.log("API Server is uo and running! on port" + port)
+console.log("API up and running! on port " + port);

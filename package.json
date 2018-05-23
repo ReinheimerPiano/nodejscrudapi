@@ -8,15 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ReinheimerPiano/nodejscrudapi.git"
+    "url": "https://github.com/navarrowebapi/nodejscrudapi.git"
   },
-  "author": "Mpiano",
-  "license": "ISC",
   "dependencies": {
-    "npm": "^6.0.0",
     "body-parser": "~1.18.2",
     "express": "~4.16.3",
     "mongoose": "~5.0.16",
     "request": "~2.85.0"
-  }
+  },
+  "author": "Fabio Navarro",
+  "license": "ISC"
 }
