@@ -5,7 +5,9 @@ var router = express.Router();//intercepta todas as rotas
 
 //MIDDLEWARE
 router.use(function(req,res,next){
-    console.log("Interceptação pelo Middleware OK");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
 
@@ -22,24 +24,21 @@ router.route('/produto')
         if(error)
             res.send("Erro ao tentar salvar um novo produto"+ error);
 
-        res.status(201).json({message:'produto inserido com sucesso'});    
+        res.status(201).json(produto);    
     });
 })
 
 .get(function(req, res){
     Produto.find(function(err, prods){
-        if(err)
+        if(err){
             res.send(err);
-        
-        res.status(200).json({
-            message:"everything is here",
-            todosProdutos:prods
-        });
+        }
+        res.status(200).json(prods);
     });
 })
 
 .put(function(req, res){
-    const id = req.params.productId;
+    const id = req.body._id;
     Produto.findById(id, function(err, produto){
         if(err){
             res.status(500).json({
@@ -55,7 +54,7 @@ router.route('/produto')
                 if(err){
                     res.send("Erro ao tentar atualizar o produto"+ err)
                 }
-                res.status(200).json({ message: "Produto atualizado com suscesso"});
+                res.status(200).json(produto);
             });
         }
     });
@@ -76,10 +75,7 @@ router.route('/produto/:productId')
                 message:"Produto não encontrado"
             });
         } else {
-            res.status(200).json({
-                message: "Produto encontrado",
-                produto: produto
-            });
+            res.status(200).json(produto);
         }
     });
 })

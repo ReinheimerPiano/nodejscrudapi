@@ -10,7 +10,7 @@ var pedidorouter = require('./app/routes/pedidoroutes');
 
 
 //PERSISTÊNCIA
-mongoose.connect('mongodb://localhost/bdCrud');
+mongoose.connect('mongodb://admin:admin@ds131329.mlab.com:31329/projetoreactnode');
 
 //Configurar a app para usar o body-parser
 app.use(bodyParser.urlencoded({extended:true}));
