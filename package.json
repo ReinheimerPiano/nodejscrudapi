@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/navarrowebapi/nodejscrudapi.git"
+    "url": "https://github.com/ReinheimerPiano/pessoa.git"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
